@@ -1,0 +1,7 @@
+order,stage,title,description,enablers,kpi
+1,Plan,Demand sensing & planning,Forecasts demand per SKU and per outlet and plans replenishment centrally.,Supra logistics platform; machine-learning demand forecasting; automated replenishment,Forecast accuracy; days of inventory
+2,Source,Raw material procurement,Buys agricultural inputs (anchovy; chilli; soybean; wheat flour; coffee beans; sugar) plus packaging from domestic and imported suppliers.,Supplier quality programs; scale purchasing across the Masan ecosystem,Input cost per unit; supplier on-time rate
+3,Make,Manufacturing,Produces seasonings; noodles; beverages; coffee and home care at 14 factories across North and South Vietnam.,FSSC 22000 / ISO / HACCP certified plants; vertical integration from raw material to finished goods,Capacity utilisation; gross margin
+4,Deliver,Distribution & logistics,Moves goods from factories to distributors and outlets; Direct Coverage cuts intermediary layers.,Direct Coverage model; sales-route redesign by region; automated ordering,Outlets covered; wholesale share; fill rate
+5,Sell,Point of sale,Reaches consumers through general trade; modern trade (incl. WinCommerce); on-premise; e-commerce and export.,Retail Supreme / ASO membership app; WinCommerce synergy; Global Business,Sell-out growth; SKUs per order
+6,Return,Feedback & insight loop,Captures sell-out and consumer data to refine assortment; innovation and production plans.,Consumer Innovation Centre; R&D centres; digital membership data,New product share; consumer complaints

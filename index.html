@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masan Consumer | Supply Chain Analysis</title>
+  <meta name="description" content="An analysis of Masan Consumer's supply chain: planning, sourcing, manufacturing, distribution and sales, with interactive charts." />
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="Back to top">
+        <img src="assets/images/masan-consumer-logo.png" alt="Masan Consumer logo" class="brand-logo"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <span class="brand-fallback" aria-hidden="true">Masan Consumer</span>
+        <span class="brand-divider"></span>
+        <span class="brand-sub">Supply Chain Analysis</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#overview">Overview</a>
+        <a href="#value-chain">Value Chain</a>
+        <a href="#performance">Performance</a>
+        <a href="#distribution">Distribution</a>
+        <a href="#manufacturing">Manufacturing</a>
+        <a href="#risks">Risks</a>
+        <a href="#recommendations">Recommendations</a>
+        <a href="#data">Data</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Shown only if CSV files cannot be loaded (e.g. opened by double-click) -->
+  <div class="load-error" id="loadError" hidden>
+    <div class="load-error-box">
+      <h2>Data could not be loaded</h2>
+      <p>Browsers block reading CSV files when a page is opened directly from disk (<code>file://</code>).
+         Start a small local server from the project folder, then open the address shown:</p>
+      <pre><code>python -m http.server 8000
+# then open http://localhost:8000</code></pre>
+      <p>On Windows you can also double-click <strong>start.bat</strong>; on macOS/Linux run <strong>./start.sh</strong>.</p>
+    </div>
+  </div>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="overview">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">Masan Consumer Corporation · HOSE: MCH · FY2025</p>
+          <h1>From farm to shelf: <span class="accent">how Masan Consumer moves 30 trillion VND of goods</span></h1>
+          <p class="lead">An end-to-end look at the supply chain behind CHIN-SU, Omachi, Kokomi, Nam Ngu, Wake-Up 247 and Vinacafe:
+            how products are planned, sourced, made, delivered and sold, and what the 2025 distribution overhaul changed.</p>
+          <div class="hero-cta">
+            <a href="#value-chain" class="btn btn-primary">Explore the value chain</a>
+            <a href="#data" class="btn btn-ghost">View the data</a>
+          </div>
+        </div>
+        <div class="kpi-grid" id="kpiGrid" aria-live="polite">
+          <!-- filled by js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VALUE CHAIN ============ -->
+    <section class="section" id="value-chain">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">01 · Value chain</p>
+          <h2>Six stages, one closed loop</h2>
+          <p>Masan Consumer controls most of its chain, from buying raw materials to the moment a retailer reorders.
+             Select a stage to see what happens there and how it is measured.</p>
+        </div>
+        <div class="chain" id="chainSteps" role="tablist" aria-label="Supply chain stages"></div>
+        <div class="chain-detail card" id="chainDetail" role="tabpanel"></div>
+      </div>
+    </section>
+
+    <!-- ============ PERFORMANCE ============ -->
+    <section class="section section-alt" id="performance">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">02 · Performance</p>
+          <h2>A dip in 2025, then a return to growth</h2>
+          <p>Revenue fell in Q2 and Q3 2025 while the new distribution model was rolled out nationwide,
+             then grew again in Q4. The outcome of the supply chain shows up first in these numbers.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card chart-card">
+            <header class="chart-head">
+              <div>
+                <h3>Quarterly net revenue</h3>
+                <p class="chart-sub">VND billion · 2024 Q1–Q3 are back-calculated</p>
+              </div>
+            </header>
+            <div class="chart-box"><canvas id="quarterChart" aria-label="Quarterly revenue chart" role="img"></canvas></div>
+            <p class="insight"><strong>Insight:</strong> Q2 2025 was the low point (−15.1% YoY) during the restructuring; Q4 2025 recovered to +3.7% YoY.</p>
+          </article>
+
+          <article class="card chart-card">
+            <header class="chart-head">
+              <div>
+                <h3>Revenue by category</h3>
+                <p class="chart-sub">VND billion · FY2024 vs FY2025</p>
+              </div>
+            </header>
+            <div class="chart-box"><canvas id="categoryChart" aria-label="Revenue by category chart" role="img"></canvas></div>
+            <p class="insight"><strong>Insight:</strong> Seasonings is still the biggest category but shrank 7%. Home &amp; Personal Care (+14%) and Coffee (+3%) grew.</p>
+          </article>
+        </div>
+
+        <article class="card chart-card mt">
+          <header class="chart-head">
+            <div>
+              <h3>Gross margin by category</h3>
+              <p class="chart-sub">% of revenue · higher means more value kept after production costs</p>
+            </div>
+            <div class="seg" role="group" aria-label="Choose year">
+              <button class="seg-btn" data-year="2024">FY2024</button>
+              <button class="seg-btn active" data-year="2025">FY2025</button>
+            </div>
+          </header>
+          <div class="chart-box chart-box-sm"><canvas id="marginChart" aria-label="Gross margin chart" role="img"></canvas></div>
+          <p class="insight"><strong>Insight:</strong> Home &amp; Personal Care added 7.2 points of margin and Coffee added 4.2 points. Convenience Foods lost 2.9 points as input costs rose.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ DISTRIBUTION ============ -->
+    <section class="section" id="distribution">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">03 · Distribution</p>
+          <h2>Direct Coverage: fewer middlemen, more outlets</h2>
+          <p>In 2024–2025 Masan Consumer moved from a wholesaler-led model to <em>Direct Coverage</em>: its own salesforce now serves
+             retail outlets directly, supported by the Retail Supreme (ASO) ordering app and the Supra logistics platform.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card chart-card">
+            <header class="chart-head">
+              <div>
+                <h3>Points of sale by channel</h3>
+                <p class="chart-sub">Number of outlets · market size shown in tooltip</p>
+              </div>
+            </header>
+            <div class="chart-box"><canvas id="channelChart" aria-label="Points of sale by channel" role="img"></canvas></div>
+            <p class="insight"><strong>Insight:</strong> General trade, mostly small family-run shops, still accounts for most outlets, so it decides how well the supply chain works.</p>
+          </article>
+
+          <article class="card chart-card">
+            <header class="chart-head">
+              <div>
+                <h3>Retail Supreme (ASO) members</h3>
+                <p class="chart-sub">Thousand retailers ordering digitally</p>
+              </div>
+            </header>
+            <div class="chart-box"><canvas id="asoChart" aria-label="ASO member growth" role="img"></canvas></div>
+            <p class="insight"><strong>Insight:</strong> ASO membership grew 61% in one month (Nov → Dec 2025). The company targets 500K members.</p>
+          </article>
+        </div>
+
+        <article class="card mt">
+          <header class="chart-head">
+            <div>
+              <h3>Before vs. after Direct Coverage</h3>
+              <p class="chart-sub">Key distribution metrics (3Q2024 baseline → end of 2025)</p>
+            </div>
+          </header>
+          <div class="compare-grid" id="compareGrid"></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ MANUFACTURING ============ -->
+    <section class="section section-alt" id="manufacturing">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">04 · Manufacturing</p>
+          <h2>14 certified factories, North to South</h2>
+          <p>Production is spread across Vietnam's main economic regions, which keeps factories close to raw materials and to consumers.
+             All plants follow FSSC 22000, ISO and HACCP standards.</p>
+        </div>
+        <div class="filter-row" id="regionFilter" role="group" aria-label="Filter by region"></div>
+        <div class="hub-grid" id="hubGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ RISKS ============ -->
+    <section class="section" id="risks">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">05 · Risk assessment</p>
+          <h2>Where the chain could break</h2>
+          <p>Each risk is scored 1–5 for likelihood and impact (author's assessment). Risks in the upper right need attention first.</p>
+        </div>
+        <div class="grid-risk">
+          <article class="card chart-card">
+            <div class="chart-box chart-box-lg"><canvas id="riskChart" aria-label="Risk matrix" role="img"></canvas></div>
+          </article>
+          <div class="risk-list" id="riskList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RECOMMENDATIONS ============ -->
+    <section class="section section-navy" id="recommendations">
+      <div class="container">
+        <div class="section-head light">
+          <p class="eyebrow">06 · Recommendations</p>
+          <h2>What to do next</h2>
+          <p>Five priorities, ordered by urgency.</p>
+        </div>
+        <ol class="reco-list" id="recoList"></ol>
+      </div>
+    </section>
+
+    <!-- ============ DATA ============ -->
+    <section class="section" id="data">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">07 · Data &amp; sources</p>
+          <h2>The numbers behind the charts</h2>
+          <p>Every chart on this page reads from the CSV files in the <code>/data</code> folder. Pick a dataset to inspect or download it.</p>
+        </div>
+        <div class="data-tabs" id="dataTabs" role="tablist"></div>
+        <div class="card table-card">
+          <div class="table-toolbar">
+            <span id="tableMeta" class="muted"></span>
+            <a id="tableDownload" class="btn btn-small" download>Download CSV</a>
+          </div>
+          <div class="table-wrap"><table id="dataTable"></table></div>
+        </div>
+        <h3 class="sources-title">Sources</h3>
+        <ul class="sources" id="sourceList"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Supply chain analysis of Masan Consumer Corporation. Built from public company reports and press releases for educational use.
+         Not investment advice. Masan Consumer name and logo are trademarks of their owner.</p>
+      <a href="#top" class="back-top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="vendor/chart.umd.min.js"></script>
+  <script src="js/csv.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

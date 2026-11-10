@@ -1,0 +1,6 @@
+metric,before,after,unit,better_when,note
+Outlets directly covered,243,413,thousand outlets,higher,Before value derived from the reported ~70% increase
+Wholesale share of revenue,60,33,%,lower,Less reliance on wholesalers = more control of stock and price
+Outlets per salesman per month,75,105,outlets,higher,Before value derived from the reported ~40% increase
+SKUs per order,2.35,4.0,SKUs,higher,Before value derived from the reported ~70% increase
+Salesforce size,3500,3500,people,neutral,Headcount unchanged - gains came from productivity
